@@ -35,4 +35,3 @@ components:
       properties:
         corpus:
           type: string
-          format: uuid
