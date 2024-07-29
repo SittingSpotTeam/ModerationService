@@ -3,7 +3,7 @@ FROM maven:3.9.1-amazoncorretto-17 AS build
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
-COPY ./pom.xml /usr/app/
+COPY ./pom.xml /usr/app/pom.xml
 
 RUN mvn -f /usr/app/pom.xml verify
 

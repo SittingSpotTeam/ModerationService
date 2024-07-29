@@ -7,20 +7,22 @@ import org.apache.commons.csv.*;
 import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.net.URL;
 
 @RestController
 @RequestMapping("moderation/api/v1")
 public class ModerationServiceController {
-
     private Set<String> wordSet = new HashSet<>();
-    private String path = "src/main/java/com/sittingspot/moderationservice/controller/badWordsEnglish.csv";
+    private String wordsUrl = "https://www.cs.cmu.edu/~biglou/resources/bad-words.txt";
+
+
     @PostMapping
     private String censorReview(@RequestBody String corpus){
+        // System.out.println(wordSet.size());
         if(this.wordSet.size()==0){
             loadWords();
-            System.out.println(wordSet.size());
+            // System.out.println(wordSet.size());
         }
-        System.out.println(corpus);
         for (String str : wordSet) {    
             str="(?i)"+str;
             corpus = corpus.replaceAll(str, "*".repeat(str.length()-4));
@@ -29,8 +31,9 @@ public class ModerationServiceController {
     }
 
     private void loadWords(){
-        try (Reader reader = new FileReader(path);
-            @SuppressWarnings("deprecation")
+        // System.out.println(wordsUrl);
+        try (InputStream inputStream = new URL(wordsUrl).openStream();
+            Reader reader = new InputStreamReader(inputStream);
             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
 
             for (CSVRecord record : csvParser) {
@@ -38,8 +41,7 @@ public class ModerationServiceController {
                 String word = record.get(0);
                 wordSet.add(word.trim().toLowerCase()); // Normalize to lower case
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
