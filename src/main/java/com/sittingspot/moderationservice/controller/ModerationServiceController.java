@@ -19,6 +19,7 @@ public class ModerationServiceController {
     @PostMapping
     private String censorReview(@RequestBody String corpus){
         // System.out.println(wordSet.size());
+        System.out.println("Received:"+corpus);
         if(this.wordSet.size()==0){
             loadWords();
             // System.out.println(wordSet.size());
