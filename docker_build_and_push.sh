@@ -1,0 +1,1 @@
+docker build . -t sittingspotapp/moderationservice:1.1-dev && docker push sittingspotapp/moderationservice:1.1-dev
