@@ -10,7 +10,7 @@ import java.util.Set;
 import java.net.URL;
 
 @RestController
-@RequestMapping("moderation/api/v1")
+@RequestMapping("/api/v1")
 public class ModerationServiceController {
     private Set<String> wordSet = new HashSet<>();
     private String wordsUrl = "https://www.cs.cmu.edu/~biglou/resources/bad-words.txt";
