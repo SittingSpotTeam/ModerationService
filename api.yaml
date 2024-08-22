@@ -4,7 +4,7 @@ info:
   description: Service that moderates the reviews to be posted
   version: 1.0.0
 servers:
-  - url: https://moderation-logic/api/v1
+  - url: http://moderationservice/api/v1
 paths:
   /:
     post:
@@ -15,7 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Review'
+              type: string
         required: true
       responses:
         '200':
@@ -23,7 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Review'
+                type: string
         '400':
           description: Invalid input
 
